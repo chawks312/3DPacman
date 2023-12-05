@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         rb = GetComponent<Rigidbody>();
