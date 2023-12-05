@@ -30,8 +30,8 @@ public class Movement : MonoBehaviour
         Vector3 movement = new Vector3(horizontal, 0f, vertical);
         transform.Translate(movement * speed * Time.deltaTime);
 
-        float mouseY = Input.GetAxis("Mouse Y");
-        Vector3 rotation = new Vector3(0f, mouseY * sensitivity, 0f);
+        float mouseX = Input.GetAxis("Mouse X");
+        Vector3 rotation = new Vector3(0f, mouseX * sensitivity, 0f);
         transform.Rotate(rotation);
 
         if (Input.GetKeyDown(KeyCode.Space) && jump_counter > 0)
