@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ghost
   - Wall
+  - Point
   layers:
   - Default
   - TransparentFX

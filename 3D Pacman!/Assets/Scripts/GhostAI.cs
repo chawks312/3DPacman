@@ -31,8 +31,25 @@ public class GhostAI : MonoBehaviour
         }
     }
 
+    // this stuff doesnt work
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Wall")) {
+            print("ghost enter wall");
+            ghost_speed = 1.0f;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Wall")) {
+            ghost_speed = 2.0f;
+        }
+    }
+
     public void Reset()
     {
         transform.position = origin_position;
+        ghost_speed = 2.0f;
     }
 }
