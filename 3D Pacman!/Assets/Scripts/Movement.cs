@@ -25,19 +25,15 @@ public class Movement : MonoBehaviour
         print("start");
         rb = GetComponent<Rigidbody>();
         ghosts = GameObject.FindGameObjectsWithTag("Ghost");
-
+        // freeze the camera rotation at the start of the game
+        rb.freezeRotation = true;
         Reset();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // I assume this line is causing cringe stuff but also if removed the object is not stable (camera spins cuz object is spinning)
-            // if can find way to stabilize camera without this line might be good
-        // maybe we just don't need rigidbody cuz we don't care too much abt physics except collision
-        // idk
-        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
-
+        
         if (canControl) {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
@@ -65,7 +61,7 @@ public class Movement : MonoBehaviour
         print("woah collision!" + other.gameObject.tag);
         if (other.gameObject.CompareTag("Ghost"))
         {
-            print("Collision with Ghost");
+            // print("Collision with Ghost");
             canControl = false;
             loseTextObject.SetActive(true);
             againButton.SetActive(true);
@@ -75,8 +71,17 @@ public class Movement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Ghost"))
+        {
+            print("Collision with Ghost");
+            canControl = false;
+            loseTextObject.SetActive(true);
+            againButton.SetActive(true);
+            Cursor.visible = true;
+        }
+
         if (other.gameObject.CompareTag("Point")) {
-            print("collider with point");
+            print("Collision with point");
             other.gameObject.SetActive(false);
             score++;
             SetScoreText();
@@ -94,7 +99,7 @@ public class Movement : MonoBehaviour
 
     public void Reset()
     {
-        print("Reset");
+        // print("Reset");
         canControl = true;
         jump_counter = 10;
         score = 0;

@@ -34,9 +34,10 @@ public class GhostAI : MonoBehaviour
     // this stuff doesnt work
     private void OnTriggerEnter(Collider other)
     {
+        // print("collision ghost + unknown detected");
         if (other.gameObject.CompareTag("Wall")) {
-            print("ghost enter wall");
-            ghost_speed = 1.0f;
+            // print("ghost enter wall");
+            ghost_speed = 0.5f;
         }
     }
 
