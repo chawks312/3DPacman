@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     private bool canControl;
     private int score;
     private GameObject[] ghosts;
+    private GameObject[] points;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class Movement : MonoBehaviour
         print("start");
         rb = GetComponent<Rigidbody>();
         ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+        points = GameObject.FindGameObjectsWithTag("Point");
         // freeze the camera rotation at the start of the game
         rb.freezeRotation = true;
         Reset();
@@ -46,7 +48,7 @@ public class Movement : MonoBehaviour
             Vector3 rotation = new Vector3(0f, (mouseX * sensitivity), 0f);
             transform.Rotate(rotation);
 
-            if (Input.GetKeyDown(KeyCode.Space) && jump_counter > 0)
+            if (Input.GetKeyDown(KeyCode.Space) && jump_counter > 0 && isGrounded())
             {
                 Jump();
             }
@@ -92,7 +94,7 @@ public class Movement : MonoBehaviour
         {
             //print("Collision with jump");
             other.gameObject.SetActive(false);
-            jump_counter+= 2;
+            jump_counter += 2;
             SetJumpText();
         }
     }
@@ -105,11 +107,25 @@ public class Movement : MonoBehaviour
 
     void SetScoreText() {
         scoreText.text = "Score: " + score.ToString();
+        foreach (GameObject ghost in ghosts)
+        {
+            GhostAI ghostAi = ghost.GetComponent<GhostAI>();
+            if (ghostAi != null)
+            {
+                ghostAi.IncreaseSpeed(score);
+            }
+        }
     }
 
     void SetJumpText()
     {
         jumpText.text = "Jumps: " + jump_counter.ToString();
+    }
+
+    private bool isGrounded() {
+        RaycastHit hit;
+        return Physics.Raycast(transform.position, Vector3.down, out hit, 0.5f) &&
+               hit.collider.CompareTag("Ground");
     }
 
     public void Reset()
@@ -131,6 +147,13 @@ public class Movement : MonoBehaviour
             GhostAI ghostAi = ghost.GetComponent<GhostAI>();
             if (ghostAi != null) {
                 ghostAi.Reset();
+            }
+        }
+        foreach (GameObject point in points) {
+            Point p = point.GetComponent<Point>();
+            if (p != null) {
+                p.Reset();
+                p.gameObject.SetActive(true);
             }
         }
         SetJumpText();

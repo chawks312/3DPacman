@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Point
   - Jump
+  - Ground
   layers:
   - Default
   - TransparentFX

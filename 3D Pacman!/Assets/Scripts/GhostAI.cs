@@ -5,6 +5,7 @@ using UnityEngine;
 public class GhostAI : MonoBehaviour
 {
     public float ghost_speed = 2.0f;
+    private float extra_speed = 0.0f;
 
     private Transform player;
     private Vector3 origin_position;
@@ -27,7 +28,7 @@ public class GhostAI : MonoBehaviour
         if (player != null) {
             Vector3 dir = (player.position - transform.position).normalized; // find direction to player
 
-            transform.Translate(dir * ghost_speed * Time.deltaTime);
+            transform.Translate(dir * (ghost_speed + extra_speed) * Time.deltaTime);
         }
     }
 
@@ -52,5 +53,11 @@ public class GhostAI : MonoBehaviour
     {
         transform.position = origin_position;
         ghost_speed = 2.0f;
+        extra_speed = 0.0f;
+    }
+
+    public void IncreaseSpeed(int score) {
+        extra_speed = (score * score) / 64.0f;
+        print("extra speed: " + extra_speed.ToString());
     }
 }
