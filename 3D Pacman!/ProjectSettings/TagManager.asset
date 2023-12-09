@@ -7,6 +7,7 @@ TagManager:
   - Ghost
   - Wall
   - Point
+  - Jump
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     public int jump_counter;  // number of initial jumps (10 for testing)
 
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI jumpText;
 
     private Rigidbody rb;  // player rigid body
     private bool canControl;
@@ -73,7 +74,7 @@ public class Movement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ghost"))
         {
-            print("Collision with Ghost");
+            //print("Collision with Ghost");
             canControl = false;
             loseTextObject.SetActive(true);
             againButton.SetActive(true);
@@ -81,20 +82,34 @@ public class Movement : MonoBehaviour
         }
 
         if (other.gameObject.CompareTag("Point")) {
-            print("Collision with point");
+            //print("Collision with point");
             other.gameObject.SetActive(false);
             score++;
             SetScoreText();
+        }
+
+        if (other.gameObject.CompareTag("Jump"))
+        {
+            //print("Collision with jump");
+            other.gameObject.SetActive(false);
+            jump_counter+= 2;
+            SetJumpText();
         }
     }
 
     void Jump() {
         rb.velocity = new Vector3(0, jump_power, 0);
         jump_counter--;
+        SetJumpText();
     }
 
     void SetScoreText() {
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    void SetJumpText()
+    {
+        jumpText.text = "Jumps: " + jump_counter.ToString();
     }
 
     public void Reset()
@@ -118,6 +133,7 @@ public class Movement : MonoBehaviour
                 ghostAi.Reset();
             }
         }
+        SetJumpText();
         SetScoreText();
     }
 }
