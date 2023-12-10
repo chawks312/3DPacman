@@ -39,6 +39,7 @@ public class GhostAI : MonoBehaviour
         if (other.gameObject.CompareTag("Wall")) {
             // print("ghost enter wall");
             ghost_speed = 0.5f;
+            extra_speed /= 2.0f;
         }
     }
 
@@ -46,6 +47,7 @@ public class GhostAI : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall")) {
             ghost_speed = 2.0f;
+            extra_speed *= 2.0f;
         }
     }
 
@@ -57,7 +59,7 @@ public class GhostAI : MonoBehaviour
     }
 
     public void IncreaseSpeed(int score) {
-        extra_speed = (score * score) / 64.0f;
+        extra_speed = (score * score) / 324.0f;
         print("extra speed: " + extra_speed.ToString());
     }
 }

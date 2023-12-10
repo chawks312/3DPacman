@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject[] ghosts;
-    // Start is called before the first frame update
     void Start()
     {
-        ResetGame();
     }
 
     // Update is called once per frame
@@ -18,7 +15,26 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void ResetGame() { 
-        
+    public void StartGame()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void ExitGame()
+    {
+        // doesn't work in the editor
+        Application.Quit();
+    }
+
+    public void MenuGame() {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void BeatGame() {
+        SceneManager.LoadScene("WinScene");
+    }
+
+    public void HowToPlayGame() {
+        SceneManager.LoadScene("Instructions");
     }
 }

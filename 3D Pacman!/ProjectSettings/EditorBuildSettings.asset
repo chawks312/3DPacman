@@ -4,6 +4,18 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: cb7c3ed50f997d748aa1fe488b1630d8
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: 5dbd1d2a7a247ee4394581b34cb7aad5
+  - enabled: 1
+    path: Assets/Scenes/Instructions.unity
+    guid: e0cbb51047d32534b970edb100d1121a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8a7ab245d6803954a8a329e573cc7580, type: 2}

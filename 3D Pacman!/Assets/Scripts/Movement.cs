@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Movement : MonoBehaviour
     public float jump_power = 15.0f;  // power of jump
     public GameObject loseTextObject;  // text displayed when a player wins
     public GameObject againButton;        // button to play again
+    public GameObject menuButton;
     public int jump_counter;  // number of initial jumps (10 for testing)
 
     public TextMeshProUGUI scoreText;
@@ -20,6 +22,7 @@ public class Movement : MonoBehaviour
     private int score;
     private GameObject[] ghosts;
     private GameObject[] points;
+    private GameObject[] jumps;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ghosts = GameObject.FindGameObjectsWithTag("Ghost");
         points = GameObject.FindGameObjectsWithTag("Point");
+        jumps = GameObject.FindGameObjectsWithTag("Jump");
         // freeze the camera rotation at the start of the game
         rb.freezeRotation = true;
         Reset();
@@ -68,6 +72,7 @@ public class Movement : MonoBehaviour
             canControl = false;
             loseTextObject.SetActive(true);
             againButton.SetActive(true);
+            menuButton.SetActive(true);
             Cursor.visible = true;
         }
     }
@@ -80,6 +85,7 @@ public class Movement : MonoBehaviour
             canControl = false;
             loseTextObject.SetActive(true);
             againButton.SetActive(true);
+            menuButton.SetActive(true);
             Cursor.visible = true;
         }
 
@@ -88,6 +94,11 @@ public class Movement : MonoBehaviour
             other.gameObject.SetActive(false);
             score++;
             SetScoreText();
+            if (score == points.Length) {
+                Reset();
+                Cursor.visible = true;
+                SceneManager.LoadScene("WinScene");
+            }
         }
 
         if (other.gameObject.CompareTag("Jump"))
@@ -141,6 +152,7 @@ public class Movement : MonoBehaviour
 
         loseTextObject.SetActive(false);
         againButton.SetActive(false);
+        menuButton.SetActive(false);
         Cursor.visible = false;
         // have to also make ghosts return to some position as well
         foreach (GameObject ghost in ghosts) {
@@ -156,7 +168,20 @@ public class Movement : MonoBehaviour
                 p.gameObject.SetActive(true);
             }
         }
+        foreach (GameObject jump in jumps) {
+            Jump j = jump.GetComponent<Jump>();
+            if (j != null) {
+                j.Reset();
+                j.gameObject.SetActive(true);
+            }
+        }
         SetJumpText();
         SetScoreText();
+    }
+
+    public void MainMenu() {
+        Reset();
+        Cursor.visible = true;
+        SceneManager.LoadScene("MainMenu");
     }
 }
