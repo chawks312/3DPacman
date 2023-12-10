@@ -9,6 +9,7 @@ TagManager:
   - Point
   - Jump
   - Ground
+  - Level2
   layers:
   - Default
   - TransparentFX
