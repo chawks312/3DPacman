@@ -28,7 +28,11 @@ public class GhostAI : MonoBehaviour
         if (player != null) {
             Vector3 dir = (player.position - transform.position).normalized; // find direction to player
 
-            transform.Translate(dir * (ghost_speed + extra_speed) * Time.deltaTime);
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 0.3f);
+
+            //transform.Translate(dir * (ghost_speed + extra_speed) * Time.deltaTime);
+            transform.Translate(Vector3.forward * (ghost_speed + extra_speed) * Time.deltaTime);
         }
     }
 
