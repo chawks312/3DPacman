@@ -180,7 +180,7 @@ public class Movement : MonoBehaviour
     }
 
     public void MainMenu() {
-        Reset();
+        // Reset();
         Cursor.visible = true;
         SceneManager.LoadScene("MainMenu");
     }

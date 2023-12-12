@@ -63,7 +63,7 @@ public class GhostAI : MonoBehaviour
     }
 
     public void IncreaseSpeed(int score) {
-        extra_speed = (score * score) / 324.0f;
+        extra_speed = (score * score) / 400.0f;
         print("extra speed: " + extra_speed.ToString());
     }
 }

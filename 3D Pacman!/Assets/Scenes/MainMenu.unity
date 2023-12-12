@@ -507,7 +507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 9eba7faf34d71c041badd976de5e191c, type: 3}
+  m_Texture: {fileID: 2800000, guid: d665079b2e89cf742981ffa2a87d1ced, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1466,8 +1466,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294901798
-  m_fontColor: {r: 0.14901961, g: 0, b: 1, a: 1}
+    rgba: 4278191615
+  m_fontColor: {r: 1, g: 0.019974263, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
